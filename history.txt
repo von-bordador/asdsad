@@ -1,0 +1,62 @@
+==================================================
+[SECTION 1: HARDWARE FAULT SIGNATURE]
+[FAULT-SEED] Hardware profile locked
+Student ID: 20241000
+Signature: 6B8A6C228DAF
+Buffer Threshold: 29
+IMU Drift: 1.9407
+Bus Race Delay: 0.0022s
+Wrote: hardware_config.json
+
+--- BASELINE CRASH LOG ---
+Exception in thread Thread-LIDAR_FRONT:
+Traceback (most recent call last):
+  File "/home/codespace/.python/current/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+Exception in thread Thread-IMU_NAV:
+Traceback (most recent call last):
+  File "/home/codespace/.python/current/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+Exception in thread Thread-GPS_MAIN:
+Traceback (most recent call last):
+  File "/home/codespace/.python/current/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/home/codespace/.python/current/lib/python3.12/threading.py", line 1010, in run
+  File "/home/codespace/.python/current/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspaces/asdsad/avionics_bus.py", line 137, in _async_polling_worker
+  File "/home/codespace/.python/current/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    raw_signal = peripheral.poll_raw_voltage()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    self._target(*self._args, **self._kwargs)
+  File "/workspaces/asdsad/avionics_bus.py", line 137, in _async_polling_worker
+    raw_signal = peripheral.poll_raw_voltage()
+  File "/workspaces/asdsad/avionics_bus.py", line 86, in poll_raw_voltage
+  File "/workspaces/asdsad/avionics_bus.py", line 137, in _async_polling_worker
+    raw_signal = peripheral.poll_raw_voltage()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/asdsad/avionics_bus.py", line 95, in poll_raw_voltage
+    self.buffer.push_frame(time.time(), voltage)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    self.buffer.push_frame(time.time(), base_voltage)
+  File "/workspaces/asdsad/avionics_bus.py", line 49, in push_frame
+    raise MemoryError(
+  File "/workspaces/asdsad/avionics_bus.py", line 49, in push_frame
+  File "/workspaces/asdsad/avionics_bus.py", line 115, in poll_raw_voltage
+MemoryError: [6B8A6C228DAF] Hardware Buffer Overflow on Channel CH_12_GPS_MAIN! Current Buffer Size: 32 (Max: 29)
+    raise MemoryError(
+MemoryError: [6B8A6C228DAF] Hardware Buffer Overflow on Channel CH_10_LIDAR_FRONT! Current Buffer Size: 30 (Max: 29)
+    self.buffer.push_frame(time.time(), simulated_voltage)
+  File "/workspaces/asdsad/avionics_bus.py", line 49, in push_frame
+    raise MemoryError(
+MemoryError: [6B8A6C228DAF] Hardware Buffer Overflow on Channel CH_14_IMU_NAV! Current Buffer Size: 31 (Max: 29)
+[SYSTEM] Avionics Bus initialized for Signature: 6B8A6C228DAF
+--- Launching Avionics Bus Master [Threads: 3] ---
+--- Telemetry Loop Terminated ---
+Total Register Writes: 29
+
+--- FINAL AVIONICS BUS REGISTER STATE ---
+Channel [LIDAR_FRONT ] -> Packets: 10 | Latest: 4.0078V | Status: SYNCED
+Channel [GPS_MAIN    ] -> Packets: 10 | Latest: 5.0043V | Status: SYNCED
+Channel [IMU_NAV     ] -> Packets:  9 | Latest: 1.0586V | Status: SYNCED

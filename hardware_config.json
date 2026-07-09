@@ -1,0 +1,8 @@
+{
+  "student_id": "20241000",
+  "signature_hash": "6B8A6C228DAF",
+  "buffer_overflow_threshold": 29,
+  "imu_voltage_drift": 1.9407,
+  "bus_race_delay_sec": 0.0022,
+  "seed_digest": "6b8a6c228daf82295321f592f408a77264097635738ba39dfa93a81720b37906"
+}
